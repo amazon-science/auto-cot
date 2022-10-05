@@ -1,0 +1,3 @@
+sklearn
+matplotlib
+sentence-transformers
