@@ -1,11 +1,18 @@
+'''
+Adapted from https://github.com/kojima-takeshi188/zero_shot_cot
+'''
+
 from statistics import mean
 from torch.utils.data import Dataset
+import openai
+import os
 import multiprocessing
 import json
 import numpy as np
 import torch
 import re
 import random
+import time
 import datetime
 
 def shuffleDict(d):
@@ -40,6 +47,67 @@ def print_now(return_flag=0):
         return now
     else:
         pass
+
+# Sentence Generator (Decoder) for GPT-3 ...
+def decoder_for_gpt3(args, input, max_length):
+    
+    # GPT-3 API allows each users execute the API within 60 times in a minute ...
+    # time.sleep(1)
+    time.sleep(args.api_time_interval)
+    
+    # https://beta.openai.com/account/api-keys
+    openai.api_key = "[Your OpenAI API Key]"
+    
+    # Specify engine ...
+    # Instruct GPT3
+    if args.model == "gpt3":
+        engine = "text-ada-001"
+    elif args.model == "gpt3-medium":
+        engine = "text-babbage-001"
+    elif args.model == "gpt3-large":
+        engine = "text-curie-001"
+    elif args.model == "gpt3-xl":
+        engine = "text-davinci-002"
+    elif args.model == "text-davinci-001":
+        engine = "text-davinci-001"
+    elif args.model == "code-davinci-002":
+        engine = "code-davinci-002"
+    else:
+        raise ValueError("model is not properly defined ...")
+        
+    if ("few_shot" in args.method or "auto" in args.method)  and engine == "code-davinci-002":
+        response = openai.Completion.create(
+          engine=engine,
+          prompt=input,
+          max_tokens=max_length,
+          temperature=args.temperature,
+          top_p=1,
+          frequency_penalty=0,
+          presence_penalty=0,
+          stop=["\n"]
+        )
+    else:
+        response = openai.Completion.create(
+            engine=engine,
+            prompt=input,
+            max_tokens=max_length,
+            temperature=args.temperature,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0,
+            stop=None
+        )
+
+    return response["choices"][0]["text"]
+
+class Decoder():
+    def __init__(self):
+        # print_now()
+        pass
+ 
+    def decode(self, args, input, max_length):
+        response = decoder_for_gpt3(args, input, max_length)
+        return response
 
 def data_reader(args):
 
@@ -218,6 +286,7 @@ def setup_data_loader(args):
 
     return dataloader
 
+# ver 0.2
 def answer_cleansing(args, pred, must_choice=False):
 
     print("pred_before : " + pred)
@@ -297,3 +366,42 @@ def create_demo_text(args, cot_flag):
         else:
             demo_text += x[i] + " " + args.direct_answer_trigger_for_fewshot + " " + y[i] + ".\n\n"
     return demo_text
+
+def answer_cleansing_zero_shot(args, pred, must_choice=False):
+    pred = pred.strip()
+    if args.dataset in ("aqua", "commonsensqa"):
+        pred = re.findall(r'A|B|C|D|E', pred)
+    elif args.dataset == "bigbench_date":
+        pred = re.findall(r'A|B|C|D|E|F', pred)
+    elif args.dataset in ("object_tracking"):
+        pred = re.findall(r'A|B|C', pred)
+    elif args.dataset in ("gsm8k", "addsub", "multiarith", "svamp", "singleeq"):
+        if must_choice:
+            pred = re.findall(r'A|B|C|D', pred)
+        else:
+            pred = pred.replace(",", "")
+            pred = [s for s in re.findall(r'-?\d+\.?\d*', pred)]
+    elif args.dataset in ("strategyqa", "coin_flip"):
+        pred = pred.lower()
+        pred = re.sub("\"|\'|\n|\.|\s|\:|\,", " ", pred)
+        pred = pred.split(" ")
+        pred = [i for i in pred if i in ("yes", "no")]
+    elif args.dataset == "last_letters":
+        pred = re.sub("\"|\'|\n|\.|\s", "", pred)
+        pred = [pred]
+    else:
+        raise ValueError("dataset is not properly defined ...")
+
+    # If there is no candidate in list, null is set.
+    if len(pred) == 0:
+        pred = ""
+    else:
+        # choose the first element in list ...
+        pred = pred[0]
+
+    # (For arithmetic tasks) if a word ends with period, it will be omitted ...
+    if pred != "":
+        if pred[-1] == ".":
+            pred = pred[:-1]
+
+    return pred

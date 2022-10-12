@@ -30,8 +30,20 @@ https://github.com/kojima-takeshi188/zero_shot_cot/tree/main/log
 
 ## Quick Start
 
+See ```try_cot.ipynb```
+
+## Instructions
+
+Construct Demos:
+
 ```
-python run_demo_log.py
+python run_demo.py
+```
+
+Run inference:
+
+```
+python run_inference.py
 ```
 
 ## Citing Auto-CoT
