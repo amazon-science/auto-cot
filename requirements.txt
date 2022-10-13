@@ -1,3 +1,4 @@
 sklearn
 matplotlib
 sentence-transformers
+jupyter
