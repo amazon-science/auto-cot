@@ -1,3 +1,7 @@
+'''
+Adapted from https://github.com/kojima-takeshi188/zero_shot_cot
+'''
+
 import argparse
 from utils import *
 
@@ -26,9 +30,6 @@ def main():
     else:
         pass
 
-    # pred = "Olivia has $23. She buys five bagels for $3 each. That means she spends $15 on bagels. She has $8 left."
-    # pred = answer_cleansing(args, pred)
-    # print(pred)
     total = 0
     correct_list = []
     with open(args.output_dir, "a") as wp:

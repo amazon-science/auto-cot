@@ -91,9 +91,3 @@ def parse_arguments():
     args.cot_trigger = "Let's think step by step."
 
     return args
-
-# if __name__ == "__main__":
-#     question = "A pet store had 64 puppies. In one day they sold 28 of them and put the rest into cages with 4 in each cage. How many cages did they use?"
-#     # for involving GPT-3, please add your openai-api key in utils.py (#Line 55)
-#     # method = ["zero_shot", "zero_shot_cot", "manual_cot", "auto_cot"]
-#     cot(method="zero_shot_cot", question=question)
