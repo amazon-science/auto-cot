@@ -37,13 +37,19 @@ See ```try_cot.ipynb```
 Construct Demos:
 
 ```
-python run_demo.py --task multiarith --pred_file log/multiarith_zero_shot_cot.log --demo_save_dir demos/multiarith
+python run_demo.py \
+--task multiarith \
+--pred_file log/multiarith_zero_shot_cot.log \
+--demo_save_dir demos/multiarith
 ```
 
 Run inference:
 
 ```
-python run_inference.py --dataset multiarith --demo_path demos/multiarith --output_dir experiment/multiarith
+python run_inference.py \
+--dataset multiarith \
+--demo_path demos/multiarith \
+--output_dir experiment/multiarith
 ```
 
 ## Citing Auto-CoT
