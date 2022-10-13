@@ -117,7 +117,7 @@ def parse_arguments():
         "--dataset", type=str, default="multiarith", choices=["aqua", "gsm8k", "commonsensqa", "addsub", "multiarith",  "strategyqa", "svamp", "singleeq", "coin_flip", "last_letters"], help="dataset used for experiment"
     )
     parser.add_argument(
-        "--demo_path", type=str, default="demo/multiarith_min_all_right_ra5", help="dataset used for experiment"
+        "--demo_path", type=str, default="demos/multiarith", help="dataset used for experiment"
     )
     parser.add_argument(
         "--resume_id", type=int, default=0, help="whether to limit test dataset size. if 0, the dataset size is unlimited and we use all the samples in the dataset for testing."
@@ -134,7 +134,7 @@ def parse_arguments():
         "--method", type=str, default="auto_cot", choices=["zero_shot", "zero_shot_cot", "few_shot", "few_shot_cot", "auto_cot"], help="method"
     )
     parser.add_argument(
-        "--output_dir", type=str, default="experiment/debug", help="output directory"
+        "--output_dir", type=str, default="experiment/multiarith", help="output directory"
     )
     parser.add_argument(
         "--max_length_cot", type=int, default=256, help="maximum length of output tokens by model for reasoning extraction"
