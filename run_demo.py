@@ -110,7 +110,6 @@ def main():
         clustered_idx[cluster_id].append(sentence_id)
 
     demos = []
-    curr_wrong = 0
 
     for i in range(len(clustered_dists)):
         print("Cluster ", i+1)
@@ -153,7 +152,6 @@ def main():
 
     with open(args.demo_save_dir, 'w', encoding="utf-8") as write_f:
         json.dump(demos, write_f, indent=4, ensure_ascii=False)
-    print(curr_wrong)
 
     y_km = clustering_model.fit_predict(corpus_embeddings)
     pca_model = PCA(n_components=2, random_state=args.random_seed)
