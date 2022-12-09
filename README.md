@@ -1,6 +1,6 @@
 # Auto-CoT: Automatic Chain of Thought Prompting in Large Language Models
 
-[![Open Auto-CoT in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/philipkd/auto-cot/blob/main/try_cot_colab.ipynb)
+[![Open Auto-CoT in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/amazon-science/auto-cot/blob/main/try_cot_colab.ipynb)
 
 Cheer AI up with the "let's think step by step" prompt? More plz. *Let’s think not just step by step, but also one by one.*
 
