@@ -14,7 +14,7 @@ def main():
     fix_seed(args.random_seed)
     
     print("OPENAI_API_KEY:")
-    print(os.getenv("OPENAI_API_KEY"))
+    print(os.getenv("OPENAI_API_KEY")[0:5] + '**********')
     
     # Initialize decoder class (load model and tokenizer) ...
     decoder = Decoder()
