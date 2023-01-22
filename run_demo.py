@@ -27,7 +27,7 @@ def parse_arguments():
     )
     parser.add_argument("--random_seed", type=int, default=192, help="random seed")
     parser.add_argument(
-        "--encoder", type=str, default="all-MiniLM-L6-v2", help="where to save the contructed demonstrations"
+        "--encoder", type=str, default="all-MiniLM-L6-v2", help="which sentence-transformer encoder for clustering"
     )
     parser.add_argument(
         "--sampling", type=str, default="center", help="whether to sample the cluster center first"

@@ -1,4 +1,4 @@
-# Auto-CoT: Automatic Chain of Thought Prompting in Large Language Models
+# Auto-CoT: Automatic Chain of Thought Prompting in Large Language Models (ICLR 2023)
 
 [![Open Auto-CoT in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/amazon-science/auto-cot/blob/main/try_cot_colab.ipynb)
 
@@ -56,11 +56,11 @@ python run_inference.py \
 
 ## Citing Auto-CoT
 ```
-@article{zhang2022automatic,
+@inproceedings{zhang2023automatic,
   title={Automatic Chain of Thought Prompting in Large Language Models},
   author={Zhang, Zhuosheng and Zhang, Aston and Li, Mu and Smola, Alex},
-  journal={arXiv preprint arXiv:2210.03493},
-  year={2022}
+  booktitle={The Eleventh International Conference on Learning Representations (ICLR 2023)},
+  year={2023}
 }
 ```
 
