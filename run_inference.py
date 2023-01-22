@@ -118,10 +118,10 @@ def parse_arguments():
         "--dataset", type=str, default="multiarith", choices=["aqua", "gsm8k", "commonsensqa", "addsub", "multiarith",  "strategyqa", "svamp", "singleeq", "coin_flip", "last_letters"], help="dataset used for experiment"
     )
     parser.add_argument(
-        "--demo_path", type=str, default="demos/multiarith", help="dataset used for experiment"
+        "--demo_path", type=str, default="demos/multiarith", help="pre-generated demos used for experiment"
     )
     parser.add_argument(
-        "--resume_id", type=int, default=0, help="whether to limit test dataset size. if 0, the dataset size is unlimited and we use all the samples in the dataset for testing."
+        "--resume_id", type=int, default=0, help="resume from which question id (current line number in the output file), if the experiment fails accidently (e.g., network error)"
     )
     parser.add_argument("--minibatch_size", type=int, default=1, choices=[1], help="minibatch size should be 1 because GPT-3 API takes only 1 input for each request")
     
@@ -147,10 +147,10 @@ def parse_arguments():
         "--limit_dataset_size", type=int, default=0, help="whether to limit test dataset size. if 0, the dataset size is unlimited and we use all the samples in the dataset for testing."
     )
     parser.add_argument(
-        "--api_time_interval", type=float, default=1.0, help=""
+        "--api_time_interval", type=float, default=1.0, help="sleep between runs to avoid excedding the rate limit of openai api"
     )
     parser.add_argument(
-        "--temperature", type=float, default=0, help=""
+        "--temperature", type=float, default=0, help="temperature for GPT-3"
     )
     parser.add_argument(
         "--log_dir", type=str, default="./log/", help="log directory"

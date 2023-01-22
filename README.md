@@ -1,4 +1,4 @@
-# Auto-CoT: Automatic Chain of Thought Prompting in Large Language Models
+# Auto-CoT: Automatic Chain of Thought Prompting in Large Language Models (ICLR 2023)
 
 Cheer AI up with the "let's think step by step" prompt? More plz. *Let’s think not just step by step, but also one by one.*
 
@@ -48,11 +48,11 @@ python run_inference.py --dataset multiarith --demo_path demos/multiarith --outp
 
 ## Citing Auto-CoT
 ```
-@article{zhang2022automatic,
+@inproceedings{zhang2023automatic,
   title={Automatic Chain of Thought Prompting in Large Language Models},
   author={Zhang, Zhuosheng and Zhang, Aston and Li, Mu and Smola, Alex},
-  journal={arXiv preprint arXiv:2210.03493},
-  year={2022}
+  booktitle={The Eleventh International Conference on Learning Representations (ICLR 2023)},
+  year={2023}
 }
 ```
 
