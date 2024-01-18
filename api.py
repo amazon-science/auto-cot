@@ -57,7 +57,7 @@ def parse_arguments():
 
     parser.add_argument("--max_num_worker", type=int, default=0, help="maximum number of workers for dataloader")
     parser.add_argument(
-        "--model", type=str, default="gpt3-xl", help="model used for decoding. Note that 'gpt3' are the smallest models."
+        "--model", type=str, default="gpt-3.5-turbo-16k", help="model used for decoding. Note that 'gpt-3.5-turbo' are the smallest models."
     )
     parser.add_argument(
         "--method", type=str, default="auto_cot", choices=["zero_shot", "zero_shot_cot", "few_shot", "few_shot_cot", "auto_cot"], help="method"

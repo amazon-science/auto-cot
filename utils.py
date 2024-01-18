@@ -58,47 +58,22 @@ def decoder_for_gpt3(args, input, max_length):
     # https://beta.openai.com/account/api-keys
     # openai.api_key = "[Your OpenAI API Key]"
     
-    # Specify engine ...
-    # Instruct GPT3
-    if args.model == "gpt3":
-        engine = "text-ada-001"
-    elif args.model == "gpt3-medium":
-        engine = "text-babbage-001"
-    elif args.model == "gpt3-large":
-        engine = "text-curie-001"
-    elif args.model == "gpt3-xl":
-        engine = "text-davinci-002"
-    elif args.model == "text-davinci-001":
-        engine = "text-davinci-001"
-    elif args.model == "code-davinci-002":
-        engine = "code-davinci-002"
-    else:
-        raise ValueError("model is not properly defined ...")
         
-    if ("few_shot" in args.method or "auto" in args.method)  and engine == "code-davinci-002":
-        response = openai.Completion.create(
-          engine=engine,
-          prompt=input,
-          max_tokens=max_length,
-          temperature=args.temperature,
-          top_p=1,
-          frequency_penalty=0,
-          presence_penalty=0,
-          stop=["\n"]
-        )
-    else:
-        response = openai.Completion.create(
-            engine=engine,
-            prompt=input,
-            max_tokens=max_length,
-            temperature=args.temperature,
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=None
-        )
+    response = openai.chat.completions.create(
+        model=args.model,
+        messages=[{
+            "role": "user",
+            "content": input
+        }],
+        max_tokens=max_length,
+        temperature=args.temperature,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0,
+        stop=None
+    )
 
-    return response["choices"][0]["text"]
+    return response.choices[0].message.content
 
 class Decoder():
     def __init__(self):
