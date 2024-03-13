@@ -67,7 +67,7 @@ def decoder_for_gpt3(args, input, max_length):
     elif args.model == "gpt3-large":
         engine = "text-curie-001"
     elif args.model == "gpt3-xl":
-        engine = "text-davinci-002"
+        engine = "gpt-3.5-turbo-instinct"
     elif args.model == "text-davinci-001":
         engine = "text-davinci-001"
     elif args.model == "code-davinci-002":
